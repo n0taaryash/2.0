@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History PEQ - Previous Examination Questions</title>
+    <link rel="stylesheet" href="/assets/css/footer.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --accent: #8b5cf6;
+            --accent-dark: #6d28d9;
+            --accent-pink: #FFB6C1
+            
+            
+        }
+
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        nav {
+            background: rgba(24, 24, 27, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, var(--accent), #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: opacity 0.3s ease;
+        }
+
+        .logo:hover {
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .menu-button {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 7rem 2rem 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--accent), #f472b6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .card {
+            background: var(--bg-secondary);
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .card:nth-child(n) {
+            animation-delay: calc(0.1s * var(--i, 0));
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card h2 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--accent);
+            border-radius: 999px;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag-bio {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(246, 92, 236, 0.429);
+            color: var(--accent-pink);
+            border-radius: 999px;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag-phy {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(75, 28, 229, 0.429);
+            color: var(--accent-blue);
+            border-radius: 999px;
+            font-size: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+
+        .view-button {
+            display: inline-block;
+            padding: 0.5rem 1.25rem;
+            background: var(--accent);
+            color: white;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .view-button:hover {
+            background: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-secondary);
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .container {
+                padding: 6rem 1rem 1rem;
+            }
+            
+            .grid {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+            <nav>
+            <div class="logo"> <img src="/assets/image/logo.png" alt="edXtra" class="header_img"></div>
+            <button class="menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/xtra">Xtra</a>
+                <a href="/ncert-lite">NCERT Lite</a>
+                <a href="/join-us">Join Us</a>
+            </div>
+        </nav>
+ 
+
+    <div class="container">
+        <header>
+            <h1>PEQ</h1>
+            <p class="subtitle">Previous Examination Questions</p>
+        </header>
+
+        <div class="grid">
+            <div class="card" style="--i:1">
+                <img src="/assets/image/thumbnail/social_science/ncert/1.png" alt="The Rise of Nationalism in Europe">
+                <div class="card-content">
+                    <span class="tag">Chapter 1</span>
+                    <span class="tag">History</span>
+                    <h2>The Rise of Nationalism in Europe</h2>
+                    <p>Explore the emergence of nationalism in Europe and the formation of nation-states during the 19th century.</p>
+                    <a href="ch1.html" class="view-button">View Content</a>
+                </div>
+            </div>
+    
+            <div class="card" style="--i:2">
+                <img src="/assets/image/thumbnail/social_science/ncert/2.png" alt="Nationalism in India">
+                <div class="card-content">
+                    <span class="tag">Chapter 2</span>
+                    <span class="tag">History</span>
+                    <h2>Nationalism in India</h2>
+                    <p>Study the development of Indian nationalism and the various movements that shaped India's independence struggle.</p>
+                    <a href="ch2.html" class="view-button">View Content</a>
+                </div>
+            </div>
+    
+            <div class="card" style="--i:3">
+                <img src="/assets/image/thumbnail/social_science/ncert/3.png" alt="The Making of a Global World">
+                <div class="card-content">
+                    <span class="tag">Chapter 3</span>
+                    <span class="tag">History</span>
+                    <h2>The Making of a Global World</h2>
+                    <p>Learn about the interconnectedness of the world through trade, technology, and cultural exchanges over time.</p>
+                    <a href="ch3.html" class="view-button">View Content</a>
+                </div>
+            </div>
+    
+            <div class="card" style="--i:4">
+                <img src="/assets/image/thumbnail/social_science/ncert/4.png" alt="The Age of Industrialization">
+                <div class="card-content">
+                    <span class="tag">Chapter 4</span>
+                    <span class="tag">History</span>
+                    <h2>The Age of Industrialization</h2>
+                    <p>Discover how industrialization transformed economies, societies, and the lives of people around the world.</p>
+                    <a href="ch4.html" class="view-button">View Content</a>
+                </div>
+            </div>
+    
+            <div class="card" style="--i:5">
+                <img src="/assets/image/thumbnail/social_science/ncert/5.png" alt="Print Culture and the Modern World">
+                <div class="card-content">
+                    <span class="tag">Chapter 5</span>
+                    <span class="tag">History</span>
+                    <h2>Print Culture and the Modern World</h2>
+                    <p>Understand the impact of print technology on society, culture, and the spread of knowledge and ideas.</p>
+                    <a href="ch5.html" class="view-button">View Content</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer_">
+        <div class="footer_inner">
+            <div class="footer_column footer_is-logo">
+                <a href="/index.html" class="footer_main-logo">
+                    <div class="footer_logo">
+                        <img src="/assets/image/Xlogo.png" alt="edXtra" class="footer_img">
+                    </div>
+                    <div class="footer_logo-info">
+                        <div class="footer_text">edXtra</div>
+                        <span class="footer_copyright">© 2024. All rights reserved.</span>
+                    </div>
+                </a>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="logo-xing" class="company"></ion-icon>Company</div>
+                <ul>
+                    <li><ion-icon name="home-outline" class="company"></ion-icon><a href="/index.html" class="footer_a">Home</a></li>
+                    <li><ion-icon name="rocket-outline" class="company"></ion-icon><a href="/about_us.html" class="footer_a">About Us</a></li>
+                    <li><ion-icon name="call-outline" class="company"></ion-icon><a href="/contact_us.html" class="footer_a">Contact Us</a></li>
+                    <li><ion-icon name="logo-foursquare" class="company"></ion-icon><a href="/founders.html" class="footer_a">Founders Desk</a></li>
+                    <li><ion-icon name="people-outline" class="company"></ion-icon><a href="/team.html" class="footer_a">Team</a></li>
+                    <li><ion-icon name="person-add-outline" class="company"></ion-icon><a href="/join_us.html" class="footer_a">Join Us</a></li>
+                    <li><ion-icon name="ticket-outline" class="company"></ion-icon><a href="/support.html" class="footer_a">Support</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="document-outline" class="company"></ion-icon>Legal</div>
+                <ul>
+                    <li><a href="/terms-and-conditions.html" class="footer_a">Terms and Conditions</a></li>
+                    <li><a href="/privacy-policy.html" class="footer_a">Privacy Policy</a></li>
+                    <li><a href="/credits.html" class="footer_a">Credits</a></li>
+                    <li><a href="/refund-policy.html" class="footer_a">Refund Policy</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="earth-outline" class="company"></ion-icon>Social</div>
+                <ul>
+                    <li><a href="https://x.com/edxtra_online" target="_blank" class="footer_a"><ion-icon name="logo-twitter"></ion-icon> edxtra_online</a></li>
+                    <li><a href="https://www.instagram.com/edxtra.online/" target="_blank" class="footer_a"><ion-icon name="logo-instagram"></ion-icon> edxtra.online</a></li>
+                    <li><a href="https://www.facebook.com/people/edxtraonline/61562638332038/" target="_blank" class="footer_a"><ion-icon name="logo-facebook"></ion-icon> edxtra.online</a></li>
+                    <li><a href="https://www.linkedin.com/company/edxtra" target="_blank" class="footer_a"><ion-icon name="logo-linkedin"></ion-icon> edxtra</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="storefront-outline" class="company"></ion-icon>Shop.edXtra</div>
+                <ul>
+                    <li><a href="#" target="_blank" class="footer_a">Notes</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Modules</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Map Booklet</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Social Science</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Science</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="grid-outline" class="company"></ion-icon>Boards</div>
+                <ul>
+                    <li><a href="/CBSE.html" class="footer_a">CBSE</a></li>
+                    <li><a href="/ICSE.html" class="footer_a">ICSE</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="cube-outline" class="company"></ion-icon>Resources</div>
+                <ul>
+                    <li><a href="/ncert_lite.html" class="footer_a">NCERT Lite</a></li>
+                    <li><a href="/peq.html" class="footer_a">PEQ-Previous Examination Questions</a></li>
+                    <li><a href="/xtra.html" class="footer_a">Xtra</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="ribbon-outline" class="company"></ion-icon>Classes</div>
+                <ul>
+                    <li><a href="/class10/index.html" class="footer_a">Grade X</a></li>
+                    <li><a href="/class9/index.html" class="footer_a">Grade IX</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="receipt-outline" class="company"></ion-icon>Subjects</div>
+                <ul>
+                    <li><a href="/science.html" class="footer_a">Science</a></li>
+                    <li><a href="/sst.html" class="footer_a">Social Science</a></li>
+                    <li><a href="/maths.html" class="footer_a">Maths</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+    
+        document.querySelector('.menu-button').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

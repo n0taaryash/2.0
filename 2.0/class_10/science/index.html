@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science | edXtra</title>
+    <link rel="stylesheet" href="/assets/css/footer.css">
+    
+        
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        header {
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #8b5cf6;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 7rem auto 2rem;
+            padding: 0 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient 8s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            padding: 1rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: #111111;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            border: 1px solid #1a1a1a;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 25px -5px rgba(139, 92, 246, 0.1);
+            border-color: #8b5cf6;
+        }
+
+        .card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: all 0.5s ease;
+            filter: brightness(0.8);
+        }
+
+        .card:hover img {
+            transform: scale(1.05);
+            filter: brightness(1);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .card p {
+            color: #9ca3af;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .view-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .view-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .view-btn:hover::before {
+            left: 100%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.2);
+        }
+
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000000;
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                border-bottom: 1px solid #1a1a1a;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"> <img src="/assets/image/logo.png" alt="edXtra" class="header_img"></div>
+            <button class="menu-btn">☰</button>
+            <div class="nav-links">
+                <a href="/INDEX.HTML">Home</a>
+                <a href="/xtra">Xtra</a>
+                <a href="/ncert-lite">NCERT Lite</a>
+                <a href="/join-us">Join Us</a>
+            </div>
+        </nav>
+    </header><br>
+    
+
+    <main>
+        <h1>SCIENCE</h1>
+        <div class="card-grid">
+            <div class="card">
+                <img src="/assets/image/thumbnail/science/ncert/ncert.png" alt="NCERT Lite">
+                <div class="card-content">
+                    <h2>NCERT Lite</h2>
+                    <p></p>
+                    <a href="NCERT_Lite/index.html" class="view-btn">View Content</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="/assets/image/thumbnail/science/PEQ/peq.png" alt="PEQ">
+                <div class="card-content">
+                    <h2>PEQ-Previous Examination Questions</h2>
+                    <p></p>
+                    <a href="peq/index.html" class="view-btn">View Content</a>
+                </div>
+            </div>
+
+            
+
+          
+        </div>
+    </main>
+    <footer class="footer_">
+        <div class="footer_inner">
+            <div class="footer_column footer_is-logo">
+                <a href="/index.html" class="footer_main-logo">
+                    <div class="footer_logo">
+                        <img src="/assets/image/Xlogo.png" alt="edXtra" class="footer_img">
+                    </div>
+                    <div class="footer_logo-info">
+                        <div class="footer_text">edXtra</div>
+                        <span class="footer_copyright">© 2024. All rights reserved.</span>
+                    </div>
+                </a>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="logo-xing" class="company"></ion-icon>Company</div>
+                <ul>
+                    <li><ion-icon name="home-outline" class="company"></ion-icon><a href="/index.html" class="footer_a">Home</a></li>
+                    <li><ion-icon name="rocket-outline" class="company"></ion-icon><a href="/about_us.html" class="footer_a">About Us</a></li>
+                    <li><ion-icon name="call-outline" class="company"></ion-icon><a href="/contact_us.html" class="footer_a">Contact Us</a></li>
+                    <li><ion-icon name="logo-foursquare" class="company"></ion-icon><a href="/founders.html" class="footer_a">Founders Desk</a></li>
+                    <li><ion-icon name="people-outline" class="company"></ion-icon><a href="/team.html" class="footer_a">Team</a></li>
+                    <li><ion-icon name="person-add-outline" class="company"></ion-icon><a href="/join_us.html" class="footer_a">Join Us</a></li>
+                    <li><ion-icon name="ticket-outline" class="company"></ion-icon><a href="/support.html" class="footer_a">Support</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="document-outline" class="company"></ion-icon>Legal</div>
+                <ul>
+                    <li><a href="/terms-and-conditions.html" class="footer_a">Terms and Conditions</a></li>
+                    <li><a href="/privacy-policy.html" class="footer_a">Privacy Policy</a></li>
+                    <li><a href="/credits.html" class="footer_a">Credits</a></li>
+                    <li><a href="/refund-policy.html" class="footer_a">Refund Policy</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="earth-outline" class="company"></ion-icon>Social</div>
+                <ul>
+                    <li><a href="https://x.com/edxtra_online" target="_blank" class="footer_a"><ion-icon name="logo-twitter"></ion-icon> edxtra_online</a></li>
+                    <li><a href="https://www.instagram.com/edxtra.online/" target="_blank" class="footer_a"><ion-icon name="logo-instagram"></ion-icon> edxtra.online</a></li>
+                    <li><a href="https://www.facebook.com/people/edxtraonline/61562638332038/" target="_blank" class="footer_a"><ion-icon name="logo-facebook"></ion-icon> edxtra.online</a></li>
+                    <li><a href="https://www.linkedin.com/company/edxtra" target="_blank" class="footer_a"><ion-icon name="logo-linkedin"></ion-icon> edxtra</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="storefront-outline" class="company"></ion-icon>Shop.edXtra</div>
+                <ul>
+                    <li><a href="#" target="_blank" class="footer_a">Notes</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Modules</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Map Booklet</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Social Science</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Science</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="grid-outline" class="company"></ion-icon>Boards</div>
+                <ul>
+                    <li><a href="/CBSE.html" class="footer_a">CBSE</a></li>
+                    <li><a href="/ICSE.html" class="footer_a">ICSE</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="cube-outline" class="company"></ion-icon>Resources</div>
+                <ul>
+                    <li><a href="/ncert_lite.html" class="footer_a">NCERT Lite</a></li>
+                    <li><a href="/peq.html" class="footer_a">PEQ-Previous Examination Questions</a></li>
+                    <li><a href="/xtra.html" class="footer_a">Xtra</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="ribbon-outline" class="company"></ion-icon>Classes</div>
+                <ul>
+                    <li><a href="/class10/index.html" class="footer_a">Grade X</a></li>
+                    <li><a href="/class9/index.html" class="footer_a">Grade IX</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="receipt-outline" class="company"></ion-icon>Subjects</div>
+                <ul>
+                    <li><a href="/science.html" class="footer_a">Science</a></li>
+                    <li><a href="/sst.html" class="footer_a">Social Science</a></li>
+                    <li><a href="/maths.html" class="footer_a">Maths</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+     <script>
+        document.querySelector('.menu-button').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+    </script>
+    <script>
+        document.querySelector('.menu-btn').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav')) {
+                document.querySelector('.nav-links').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

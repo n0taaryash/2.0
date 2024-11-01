@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edXtra | Map Games</title>
+    <link rel="icon" type="images/x-icon" href="logo.ico" />
+    <link rel="stylesheet" href="/assets/css/footer.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(0, 0, 0, 0.95);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #1a1a1a;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #8b5cf6;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: translateY(-1px);
+            filter: brightness(1.2);
+        }
+
+
+        /* Main Content Styles */
+        main {
+            max-width: 1200px;
+            margin: 7rem auto 2rem;
+            padding: 0 1rem;
+        }
+
+        .title-section {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle {
+            color: #9ca3af;
+            font-size: 1.2rem;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .game-card {
+            background: #111111;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid #1a1a1a;
+        }
+
+        .game-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(139, 92, 246, 0.1);
+            border-color: #8b5cf6;
+        }
+
+        .game-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .game-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .chapter-name {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .card-content p {
+            color: #9ca3af;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .card-content a {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(45deg, #8b5cf6, #ec4899);
+            color: white;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .card-content a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .menu-btn {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background-color: #000000;
+                padding: 1rem;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                border-bottom: 1px solid #1a1a1a;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo"><img src="/assets/image/logo.png" alt="edXtra" class="header_img"></div>
+            <div class="nav-links">
+                <a href="/index.html">Home</a>
+                <a href="/class10/index.html">NCERT Lite</a>
+                <a href="/xtra.html">Xtra</a>
+                <a href="/joinus.html">Join Us</a>
+            </div>
+            <button class="menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="title-section">
+            <h1>edXtra Map Games</h1>
+            <p class="subtitle">Crush Your Map Questions with Game Power!</p>
+        </div>
+        
+        <div class="games-grid">
+            <!-- All Cards -->
+            <div class="game-card">
+                <img src="/assets/image/thumbnail/social_science/mapgames/h1.png" alt="Nationalism In India">
+                <div class="card-content">
+                    <h2 class="chapter-name">H1. Nationalism In India</h2>
+                    <p>Explore key locations of India's freedom struggle through an engaging map of historic events and leaders.</p>
+                    <a href="https://www.purposegames.com/game/10-ss-1-2-nationalism-in-india-easy">Play Now</a>
+                </div>
+            </div>
+
+            <!-- Repeat this card block structure for each game card -->
+
+            <div class="game-card">
+                <img src="/assets/image/thumbnail/social_science/mapgames/g1.png" alt="g1">
+                <div class="card-content">
+                    <h2 class="chapter-name">G1. Soil Type & G4. Wheat and Rice</h2>
+                    <p>Delve into India's soil types and discover where wheat and rice are cultivated through an interactive map</p>
+                    <a href="https://www.purposegames.com/game/10-ss-03-05-06-g1-g4-soil-types-wheat-rice-game ">Play Now</a>
+                </div>
+            </div>
+
+
+            <div class="game-card">
+                <img src="/assets/image/thumbnail/social_science/mapgames/g3.png" alt="g3">
+                <div class="card-content">
+                    <h2 class="chapter-name">G3. Dams of India</h2>
+                    <p>Explore the major dams of India and their significance in irrigation and water management through this interactive map.</p>
+                    <a href="">Play Now</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="/assets/image/thumbnail/social_science/mapgames/g4.png" alt="g4">
+                <div class="card-content">
+                    <h2 class="chapter-name">G4. Major Producing States</h2>
+                    <p>Discover the major producing states for wheat, rice, sugarcane, rubber, and jute across India.</p>
+                    <a href="https://www.purposegames.com/game/10-ss-7-g4-major-producing-states-largest">Play Now</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="/assets/image/thumbnail/social_science/mapgames/g4.png" alt="g4">
+                <div class="card-content">
+                    <h2 class="chapter-name">G4. Agriculture</h2>
+                    <p>Explore India's major agricultural regions and key crops through this interactive map.</p>
+                    <a href="https://www.purposegames.com/game/10ss-7-2-major-producing-states-all ">Play Now</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="/assets/image/thumbnail/social_science/mapgames/g5.png" alt="g5">
+                <div class="card-content">
+                    <h2 class="chapter-name">G5. Mines and Oil Fields</h2>
+                    <p>Uncover the locations of major mines and oil fields in India, showcasing the country's natural resources.</p>
+                    <a href="https://www.purposegames.com/game/10ss-8-9-10-g5-iron-ore-coal-mines-oil-fields ">Play Now</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="/assets/image/thumbnail/social_science/mapgames/g5.png" alt="g5">
+                <div class="card-content">
+                    <h2 class="chapter-name">G5. Thermal and Nuclear Plants</h2>
+                    <p>Discover India's thermal and nuclear power plants and their role in powering the nation through this interactive map.</p>
+                    <a href="https://www.purposegames.com/game/10ss-11-12-thermal-and-nuclear-plants ">Play Now</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="/assets/image/thumbnail/social_science/mapgames/g6.png" alt="g6">
+                <div class="card-content">
+                    <h2 class="chapter-name">G6. Cotton Industry and Iron & Steel Industry</h2>
+                    <p>Trace the major cotton and iron & steel production centers in India’s industrial landscape.</p>
+                    <a href="https://www.purposegames.com/game/10-ss-13-14-cotton-textile-and-ironsteel-industry ">Play Now</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="/assets/image/thumbnail/social_science/mapgames/g8.png" alt="g8">
+                <div class="card-content">
+                    <h2 class="chapter-name">G8. IT Parks</h2>
+                    <p>Discover the major producing states for wheat, rice, sugarcane, rubber, and jute across India.</p>
+                    <a href="https://www.purposegames.com/game/10ss-15-g6-software-technology-it-parks ">Play Now</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="/assets/image/thumbnail/social_science/mapgames/g7.png" alt="g7">
+                <div class="card-content">
+                    <h2 class="chapter-name">G7. Seaports and Airports</h2>
+                    <p>Navigate India's key seaports and airports, the gateways for trade and travel.</p>
+                    <a href="https://www.purposegames.com/game/10ss-16-17-g7-sea-ports-air-ports-of-india ">Play Now</a>
+                </div>
+            </div>
+
+            <div class="game-card">
+                <img src="/assets/image/thumbnail/social_science/mapgames/gcomplete.png" alt="gc">
+                <div class="card-content">
+                    <h2 class="chapter-name">Final Geography Map</h2>
+                    <p>Review key locations from Lessons 1 to 6 in this comprehensive interactive map of India’s geography.</p>
+                    <a href="https://www.purposegames.com/game/10-ss-geo-final-g3-5-6-7">Play Now</a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="footer_">
+        <div class="footer_inner">
+            <div class="footer_column footer_is-logo">
+                <a href="/index.html" class="footer_main-logo">
+                    <div class="footer_logo">
+                        <img src="/assets/image/Xlogo.png" alt="edXtra" class="footer_img">
+                    </div>
+                    <div class="footer_logo-info">
+                        <div class="footer_text">edXtra</div>
+                        <span class="footer_copyright">© 2024. All rights reserved.</span>
+                    </div>
+                </a>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="logo-xing" class="company"></ion-icon>Company</div>
+                <ul>
+                    <li><ion-icon name="home-outline" class="company"></ion-icon><a href="/index.html" class="footer_a">Home</a></li>
+                    <li><ion-icon name="rocket-outline" class="company"></ion-icon><a href="/about_us.html" class="footer_a">About Us</a></li>
+                    <li><ion-icon name="call-outline" class="company"></ion-icon><a href="/contact_us.html" class="footer_a">Contact Us</a></li>
+                    <li><ion-icon name="logo-foursquare" class="company"></ion-icon><a href="/founders.html" class="footer_a">Founders Desk</a></li>
+                    <li><ion-icon name="people-outline" class="company"></ion-icon><a href="/team.html" class="footer_a">Team</a></li>
+                    <li><ion-icon name="person-add-outline" class="company"></ion-icon><a href="/join_us.html" class="footer_a">Join Us</a></li>
+                    <li><ion-icon name="ticket-outline" class="company"></ion-icon><a href="/support.html" class="footer_a">Support</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="document-outline" class="company"></ion-icon>Legal</div>
+                <ul>
+                    <li><a href="/terms-and-conditions.html" class="footer_a">Terms and Conditions</a></li>
+                    <li><a href="/privacy-policy.html" class="footer_a">Privacy Policy</a></li>
+                    <li><a href="/credits.html" class="footer_a">Credits</a></li>
+                    <li><a href="/refund-policy.html" class="footer_a">Refund Policy</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="earth-outline" class="company"></ion-icon>Social</div>
+                <ul>
+                    <li><a href="https://x.com/edxtra_online" target="_blank" class="footer_a"><ion-icon name="logo-twitter"></ion-icon> edxtra_online</a></li>
+                    <li><a href="https://www.instagram.com/edxtra.online/" target="_blank" class="footer_a"><ion-icon name="logo-instagram"></ion-icon> edxtra.online</a></li>
+                    <li><a href="https://www.facebook.com/people/edxtraonline/61562638332038/" target="_blank" class="footer_a"><ion-icon name="logo-facebook"></ion-icon> edxtra.online</a></li>
+                    <li><a href="https://www.linkedin.com/company/edxtra" target="_blank" class="footer_a"><ion-icon name="logo-linkedin"></ion-icon> edxtra</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="storefront-outline" class="company"></ion-icon>Shop.edXtra</div>
+                <ul>
+                    <li><a href="#" target="_blank" class="footer_a">Notes</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Modules</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Map Booklet</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Social Science</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Science</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="grid-outline" class="company"></ion-icon>Boards</div>
+                <ul>
+                    <li><a href="/CBSE.html" class="footer_a">CBSE</a></li>
+                    <li><a href="/ICSE.html" class="footer_a">ICSE</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="cube-outline" class="company"></ion-icon>Resources</div>
+                <ul>
+                    <li><a href="/ncert_lite.html" class="footer_a">NCERT Lite</a></li>
+                    <li><a href="/peq.html" class="footer_a">PEQ-Previous Examination Questions</a></li>
+                    <li><a href="/xtra.html" class="footer_a">Xtra</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="ribbon-outline" class="company"></ion-icon>Classes</div>
+                <ul>
+                    <li><a href="/class10/index.html" class="footer_a">Grade X</a></li>
+                    <li><a href="/class9/index.html" class="footer_a">Grade IX</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="receipt-outline" class="company"></ion-icon>Subjects</div>
+                <ul>
+                    <li><a href="/science.html" class="footer_a">Science</a></li>
+                    <li><a href="/sst.html" class="footer_a">Social Science</a></li>
+                    <li><a href="/maths.html" class="footer_a">Maths</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+    
+    
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <script>
+        document.querySelector('.menu-btn').addEventListener('click', () => {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('nav')) {
+                document.querySelector('.nav-links').classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edXtra- We Add Xtra Value</title>
+     <link rel="stylesheet" type="text/css" href="/assets/css/footer.css"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" type="images/x-icon" href="logo.ico" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(10, 10, 10, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 0;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #ff00ff, #00ffff);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+       
+        /* Features Grid - Modified for one card per line */
+        .features-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, rgba(25, 25, 25, 0.9), rgba(35, 35, 35, 0.9));
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 15px;
+            background: linear-gradient(45deg, #ff00ff33, #00ffff33);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 0, 255, 0.1);
+        }
+
+        .card-content {
+            flex: 1;
+            position: relative;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .feature-card p {
+            color: #aaa;
+            position: relative;
+            margin-bottom: 0;
+            max-width: 600px;
+        }
+
+        /* New Button Styles */
+        .view-content-btn {
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-left: 2rem;
+        }
+
+        .view-content-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            transition: left 0.3s ease;
+        }
+
+        .view-content-btn:hover::before {
+            left: 0;
+        }
+
+        .view-content-btn span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .view-content-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 0, 255, 0.3);
+        }
+
+
+
+        .slider-container {
+            height: 100vh;
+            position: relative;
+            perspective: 1000px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .slider-wrapper {
+            position: relative;
+            height: 100%;
+            width: 100%;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .slide {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            top: 10%;
+            left: 10%;
+            opacity: 0;
+            transform: translateZ(-500px) translateX(0);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.2);
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateZ(0) translateX(0);
+        }
+
+        .slide.prev {
+            opacity: 0.7;
+            transform: translateZ(-250px) translateX(-100%);
+        }
+
+        .slide.next {
+            opacity: 0.7;
+            transform: translateZ(-250px) translateX(100%);
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.7);
+        }
+
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 80%;
+            padding: 2rem;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 0, 255, 0.1);
+        }
+
+        .slide-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
+        }
+
+        .slide-content p {
+            font-size: 1.25rem;
+            color: #e5e7eb;
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        .slider-nav {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 10;
+        }
+
+        .slider-nav button {
+            background: rgba(255, 0, 255, 0.2);
+            border: none;
+            padding: 1rem 2rem;
+            color: white;
+            border-radius: 30px;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .slider-nav button:hover {
+            background: rgba(0, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 6rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: linear-gradient(45deg, #ff00ff, #00ffff);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(45deg, #ff00ff33, #00ffff33);
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+            linear-gradient(45deg, #ff00ff33, #00ffff33);
+        }
+
+        .hero-content {
+            text-align: center;
+            z-index: 1;
+            padding: 2rem;
+        }
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 2;
+        }
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 6rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+    </style>
+</head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;600;800&display=swap" rel="stylesheet">
+<body>
+    <header>
+        <div class="container nav-container">
+           <div class="logo"> <img src="/assets/image/logo.png" alt="edXtra" class="header_img"></div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#xtra">Xtra</a></li>
+                    <li><a href="#ncert">NCERT Lite</a></li>
+                    <li><a href="#join">Join Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1>EDXTRA 2.0</h1>
+            <p class="subtitle">We're thrilled to unveil our new look, offering you the coolest and most futuristic user-student experience in academic resources. With a sleek aesthetic vibe and an intuitive design, navigating your learning journey has never been easier or more enjoyable. Explore our curated materials, meticulously crafted to simplify your learning and empower you to achieve academic excellence. Join us in embracing this exciting new chapter, where education meets style and functionality. Let’s embark on this journey together!</p>
+        </div>
+        <div class="scroll-indicator">
+            <svg width="40" height="100%vh" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 5v14M19 12l-7 7-7-7"/>
+            </svg>
+        </div>
+    </div>
+
+
+
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+               
+                <div class="feature-container" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                    <!-- Feature Card 1 -->
+                    <div class="feature-card" style="flex: 1; min-width: 300px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                        <div class="card-content" style="text-align: center;">
+                            <h3>Science</h3>
+                            <p>Unlock the world of science with our meticulously crafted study companion, designed to simplify and enhance your learning journey. Dive deep into the fundamentals as each concept is illuminated with marked key points, essential formulas, and important chemical equations. From foundational laws to complex reactions, this resource ensures that every crucial aspect is not just learned but mastered. Streamline your studies, retain core concepts, and effortlessly grasp the essence of science with this comprehensive tool for success.</p>
+                        </div>
+                        <a href="/class_10/science/index.html" >  <button class="view-content-btn" style="margin-top: 20px; padding: 10px 20px;"><span>View Content</span></button></a>
+                    </div>
+                
+                    <!-- Feature Card 2 -->
+                    <div class="feature-card" style="flex: 1; min-width: 300px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                        <div class="card-content" style="text-align: center;">
+                            <h3>Social Science</h3>
+                            <p>Unlock the world of social science with our carefully curated study companion, designed to make complex topics clear and accessible. Explore key events, theories, and concepts with highlighted main points, essential dates, and important definitions, all tailored for quick reference and efficient study. From historical milestones to foundational civic ideas, this resource ensures that every critical aspect is not just understood but mastered. Simplify your studies and confidently grasp the essence of social science with this all-in-one guide.</p>
+                        </div>
+                        <a href="/class_10/social_science/index.html" > <button class="view-content-btn" style="margin-top: 20px; padding: 10px 20px;"><span>View Content</span></button></a>
+                    </div>
+                </div>
+                        
+                <div class="feature-card" style="flex: 1; padding: 20px;">
+                    <div class="card-content">
+                        <h3>CBSE- Class X</h3>
+                        <p>Unlock success in CBSE Class X with edXtra’s powerful study toolkit! Our NCERT Lite offers a streamlined approach to mastering core subjects, highlighting essential concepts, formulas, and key points for quick revision. Dive deeper with PEQ (Previous Exam Questions) to practice and familiarize yourself with the types of questions frequently asked in board exams. And for those who crave a little extra, Xtra provides enhanced resources to deepen your understanding and boost your performance. Simplify your study experience and conquer Class X with confidence using edXtra’s comprehensive support.</p>
+                    </div>
+                    <a href="/class_10/index.html" >   <button class="view-content-btn"><span>View Content</span></button>
+                </div>
+                <div class="feature-container" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                    <!-- Feature Card 1 -->
+                    <div class="feature-card" style="flex: 1; min-width: 300px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                        <div class="card-content" style="text-align: center;">
+                            <h3>NCERT Lite</h3>
+                            <p>Introducing **NCERT Lite – your ultimate study companion!** Meticulously crafted by top achievers and the dedicated edXtra House team, NCERT Lite provides streamlined, high-quality resources to help you master the essentials of Class X. With highlighted key points, critical formulas, and expertly simplified explanations, NCERT Lite ensures efficient and focused learning. Designed to make revision easy and concepts crystal-clear, it’s the perfect tool to boost your confidence and academic performance. Unlock success with NCERT Lite, where excellence meets simplicity for an exceptional study experience!.</p>
+                        </div>
+                        <a href="/class_10/social_science/index.html" > <button class="view-content-btn" style="margin-top: 20px; padding: 10px 20px;"><span>View Content</span></button></a>
+                    </div>
+                
+                    <!-- Feature Card 2 -->
+                    <div class="feature-card" style="flex: 1; min-width: 300px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                        <div class="card-content" style="text-align: center;">
+                            <h3>PEQ-Previous Examination Questions</h3>
+                            <p>Master your exams with edXtra's **PEQ (Previous Exam Questions)** – the ultimate tool for focused preparation! Our PEQ collection brings together frequently asked questions from past CBSE exams, helping you identify patterns, understand exam trends, and target essential topics. Each question is accompanied by concise solutions and tips for tackling similar questions with confidence. With PEQ, practice becomes purposeful, enabling you to approach each exam with clarity and readiness. Make PEQ your go-to resource to streamline revision and elevate your performance in CBSE Class X exams!</p>
+                        </div>
+                        <button class="view-content-btn" style="margin-top: 20px; padding: 10px 20px;"><span>View Content</span></button>
+                    </div>
+                </div>
+
+                <div class="feature-container" style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center;">
+                    <!-- Feature Card 1 -->
+                    <div class="feature-card" style="flex: 1; min-width: 300px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                        <div class="card-content" style="text-align: center;">
+                            <h3>Xtra by edXtra</h3>
+                            <p>Boost your learning with edXtra’s Xtra – your gateway to going beyond the basics! Designed to deepen your understanding and strengthen core concepts, Xtra provides enhanced resources, practice materials, and insights across subjects. Whether it’s additional study guides, advanced practice questions, or interactive tools, Xtra equips you with everything you need to excel beyond the curriculum. Perfect for students aiming to enrich their knowledge, Xtra empowers you to master Class X with confidence and clarity. Expand your horizons with Xtra, where learning goes above and beyond!</p>
+                        </div>
+                        <a href="/xtra/index.html" > <button class="view-content-btn" style="margin-top: 20px; padding: 10px 20px;"><span>View Content</span></button></a>
+                    </div>
+                
+                    <!-- Feature Card 2 -->
+                    <div class="feature-card" style="flex: 1; min-width: 300px; padding: 20px; display: flex; flex-direction: column; align-items: center;">
+                        <div class="card-content" style="text-align: center;">
+                            <h3>edXtra Shop</h3>
+                            <p>Get ready for **edXtra Shop – LAUNCHING SOON!** Your one-stop destination for premium study resources, meticulously hand-prepared by subject toppers, achievers, and the dedicated team at edXtra House. From comprehensive guides to targeted practice materials, every resource is crafted with care to support your Class X journey. Elevate your study experience with high-quality tools designed to make learning efficient and effective. Stay tuned for edXtra Shop – where excellence meets accessibility, all curated just for you!</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+
+
+                <div class="feature-card" style="flex: 1; padding: 20px;">
+                    <div class="card-content">
+                        <h3>Welcome to edXtra</h3>
+                        <p>Your go-to place for CBSE study materials, specially designed for students like you, and it's all free! Our goal is simple: to give everyone access to top-quality resources without worrying about money. We've got something special called "NCERT Lite" it's like a super-condensed version of NCERT Books to make learning easier and more fun. We believe that everyone should have the chance to learn, no matter where they come from or how much money they have. Join us on this journey to make education available to everyone, everywhere. At edXtra, we're not just giving out books we're lighting up a path to success for you. Let's dream big together and change the world, one lesson at a time. So come on board with edXtra, where learning is easy, and your future is bright!
+
+                            <br>So, what are you waiting for? Dive into the realm of edXtra, where possibilities are limitless, and your journey towards scholastic excellence starts. Discover the transformative power of NCERT Lite and embark on a learning adventure like never before. Welcome to edXtra</p>
+                    </div>
+                 
+                </div>
+                
+                <div class="feature-card" style="flex: 1; padding: 20px;">
+                    <div class="card-content">
+                        <h3>At edXtra</h3>
+                        <p>At edXtra, our mission is to empower education by offering NCERT Lite and a comprehensive repository of question papers, enhancing effective learning and supporting students worldwide with unparalleled resources. We simplify studying with easy-to-understand, condensed NCERT textbooks and provide a wide range of practice papers to boost exam confidence. Our innovative platform uses the latest educational technologies to create an engaging learning experience, catering to diverse learning styles. Committed to excellence, we continuously update our resources to ensure students have the tools they need to succeed academically and beyond. Additionally, we offer personalized learning paths and expert guidance to address individual student needs, fostering both academic achievement and personal growth. Choose edXtra for your educational journey and unlock your full potential.</p>
+                    </div>
+               
+                </div>
+                
+                <div class="feature-card" style="flex: 1; padding: 20px;">
+                    <div class="card-content">
+                        <h3>Join edXtra Community</h3>
+                        <p> Join us on a journey to build India's largest student-teacher community, where knowledge flows freely, and support is always just a message away. Connect with like-minded peers and experienced educators, gain insights, exchange resources, and stay motivated on your academic path. Together, let’s create a powerful learning network and grow beyond boundaries.</p>
+                    </div>
+                    <a href="https://chat.whatsapp.com/DEsJ6POYHWG1n8ElAo6ZUr"><button class="view-content-btn"><span>Join Now</span></button></a>
+                </div>
+                
+                <style>
+                    /* Mobile-specific button alignment */
+                    @media (max-width: 768px) {
+                        .feature-card {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                        }
+                        .view-content-btn {
+                            margin-top: 20px; /* Adds space between text and button */
+                        }
+                    }
+                </style>
+                
+        </div>
+    </section>
+
+           <footer class="footer_">
+        <div class="footer_inner">
+            <div class="footer_column footer_is-logo">
+                <a href="#" class="footer_main-logo">
+                    <div class="footer_logo">
+                        <img src="/assets/image/Xlogo.png" alt="edXtra" class="footer_img">
+                    </div>
+                    <div class="footer_logo-info">
+                        <div class="footer_text">edXtra</div>
+                        <span class="footer_copyright">© 2024. All rights reserved.</span>
+                    </div>
+                </a>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="logo-xing" class="company"></ion-icon>Company</div>
+                <ul>
+                    <li><ion-icon name="home-outline" class="company"></ion-icon><a href="/index.html" class="footer_a">Home</a></li>
+                    <li><ion-icon name="rocket-outline" class="company"></ion-icon><a href="/about_us.html" class="footer_a">About Us</a></li>
+                    <li><ion-icon name="call-outline" class="company"></ion-icon><a href="/contact_us.html" class="footer_a">Contact Us</a></li>
+                    <li><ion-icon name="logo-foursquare" class="company"></ion-icon><a href="/founders.html" class="footer_a">Founders Desk</a></li>
+                    <li><ion-icon name="people-outline" class="company"></ion-icon><a href="/team.html" class="footer_a">Team</a></li>
+                    <li><ion-icon name="person-add-outline" class="company"></ion-icon><a href="/join_us.html" class="footer_a">Join Us</a></li>
+                    <li><ion-icon name="ticket-outline" class="company"></ion-icon><a href="/support.html" class="footer_a">Support</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="document-outline" class="company"></ion-icon>Legal</div>
+                <ul>
+                    <li><a href="/terms-and-conditions.html" class="footer_a">Terms and Conditions</a></li>
+                    <li><a href="/privacy-policy.html" class="footer_a">Privacy Policy</a></li>
+                    <li><a href="/credits.html" class="footer_a">Credits</a></li>
+                    <li><a href="/refund-policy.html" class="footer_a">Refund Policy</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="earth-outline" class="company"></ion-icon>Social</div>
+                <ul>
+                    <li><a href="https://x.com/edxtra_online" target="_blank" class="footer_a"><ion-icon name="logo-twitter"></ion-icon> edxtra_online</a></li>
+                    <li><a href="https://www.instagram.com/edxtra.online/" target="_blank" class="footer_a"><ion-icon name="logo-instagram"></ion-icon> edxtra.online</a></li>
+                    <li><a href="https://www.facebook.com/people/edxtraonline/61562638332038/" target="_blank" class="footer_a"><ion-icon name="logo-facebook"></ion-icon> edxtra.online</a></li>
+                    <li><a href="https://www.linkedin.com/company/edxtra" target="_blank" class="footer_a"><ion-icon name="logo-linkedin"></ion-icon> edxtra</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="storefront-outline" class="company"></ion-icon>Shop.edXtra</div>
+                <ul>
+                    <li><a href="#" target="_blank" class="footer_a">Notes</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Modules</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Map Booklet</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Social Science</a></li>
+                    <li><a href="#" target="_blank" class="footer_a">Science</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="grid-outline" class="company"></ion-icon>Boards</div>
+                <ul>
+                    <li><a href="/CBSE.html" class="footer_a">CBSE</a></li>
+                    <li><a href="/ICSE.html" class="footer_a">ICSE</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="cube-outline" class="company"></ion-icon>Resources</div>
+                <ul>
+                    <li><a href="/ncert_lite.html" class="footer_a">NCERT Lite</a></li>
+                    <li><a href="/peq.html" class="footer_a">PEQ-Previous Examination Questions</a></li>
+                    <li><a href="/xtra.html" class="footer_a">Xtra</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer_column footer_is-navigation">
+                <div class="footer_column-title"><ion-icon name="ribbon-outline" class="company"></ion-icon>Classes</div>
+                <ul>
+                    <li><a href="/class10/index.html" class="footer_a">Grade X</a></li>
+                    <li><a href="/class9/index.html" class="footer_a">Grade IX</a></li>
+                </ul>
+                <div class="footer_column-title"><ion-icon name="receipt-outline" class="company"></ion-icon>Subjects</div>
+                <ul>
+                    <li><a href="/science.html" class="footer_a">Science</a></li>
+                    <li><a href="/sst.html" class="footer_a">Social Science</a></li>
+                    <li><a href="/maths.html" class="footer_a">Maths</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    
+      <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+      <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+     <script>
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
